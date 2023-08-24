@@ -1,0 +1,5 @@
+com\yekaa\modules\datamahasiswa\dto\DataMahasiswaResponseDTO.class
+com\yekaa\modules\datamahasiswa\entity\DataMahasiswa.class
+com\yekaa\modules\datamahasiswa\service\DataMahasiswaServiceImpl.class
+com\yekaa\modules\datamahasiswa\repository\DataMahasiswaRepositoryImpl.class
+com\yekaa\modules\datamahasiswa\dto\DataMahasiswaRequestDTO.class
