@@ -4,6 +4,7 @@ import com.yekaa.modules.datamatakuliah.dto.DataMataKuliahRequestDTO;
 import com.yekaa.modules.datamatakuliah.dto.DataMataKuliahResponseDTO;
 import com.yekaa.modules.datamatakuliah.entity.DataMataKuliah;
 import com.yekaa.modules.datamatakuliah.repository.DataMataKuliahRepositoryImpl;
+import com.yekaa.modules.dataprs.entity.DataPrs;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,7 +29,8 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
                         x.getId(),
                         x.getKodeMataKuliah(),
                         x.getNama(),
-                        x.getSks())
+                        x.getSks(),
+                        x.getDataRegistrasi())
         ).toList();
 
         return result;
@@ -45,8 +47,9 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
                     query.get().getId(),
                     query.get().getKodeMataKuliah(),
                     query.get().getNama(),
-                    query.get().getSks()
-            ));
+                    query.get().getSks(),
+                    query.get().getDataRegistrasi())
+            );
         } else {
             throw new EntityNotFoundException("DataMataKuliah with ID " + id + " not found");
         }

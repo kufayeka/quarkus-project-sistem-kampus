@@ -11,6 +11,7 @@ import com.yekaa.modules.dataprs.repository.DataPrsRepositoryImpl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PrePersist;
 import jakarta.transaction.Transactional;
 
 import javax.xml.crypto.Data;
@@ -84,17 +85,6 @@ public class DataPrsServiceImpl implements DataPrsService {
         query.setDataMataKuliah(dataMataKuliahExisting);
         query.setTanggalPendaftaran(LocalDateTime.now());
         repository.persist(query);
-
-        System.out.println("DATA REGISTRASI MHS:" + " " + dataMahasiswaExisting);
-        System.out.println("DATA REGISTRASI MATKUL:" + " " + dataMataKuliahExisting);
-
-        Set<DataPrs> dataRegistrasiMhs = dataMahasiswaExisting.getDataRegistrasi();
-        dataRegistrasiMhs.add(query);
-        Set<DataPrs> dataRegistrasiMatkul = dataMahasiswaExisting.getDataRegistrasi();
-        dataRegistrasiMatkul.add(query);
-
-        repositoryDataMahasiswa.getEntityManager().merge(dataMahasiswaExisting);
-        repositoryDataMataKuliah.getEntityManager().merge(dataMataKuliahExisting);
     }
 
     @Override

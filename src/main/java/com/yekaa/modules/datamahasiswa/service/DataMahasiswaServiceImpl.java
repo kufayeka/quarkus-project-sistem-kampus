@@ -5,6 +5,7 @@ import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaResponseDTO;
 import com.yekaa.modules.datamahasiswa.entity.DataMahasiswa;
 import com.yekaa.modules.datamahasiswa.repository.DataMahasiswaRepository;
 import com.yekaa.modules.datamahasiswa.repository.DataMahasiswaRepositoryImpl;
+import com.yekaa.modules.dataprs.entity.DataPrs;
 import jakarta.ejb.DuplicateKeyException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -33,7 +34,8 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
                         x.getId(),
                         x.getNama(),
                         x.getNrp(),
-                        x.getJurusan())
+                        x.getJurusan(),
+                        x.getDataRegistrasi())
         ).toList();
 
         return result;
@@ -50,7 +52,8 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
                     query.get().getId(),
                     query.get().getNama(),
                     query.get().getNrp(),
-                    query.get().getJurusan()
+                    query.get().getJurusan(),
+                    query.get().getDataRegistrasi()
             ));
         } else {
             throw new EntityNotFoundException("DataMahasiswa with ID " + id + " not found");
@@ -70,7 +73,8 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
                     query.get().getId(),
                     query.get().getNama(),
                     query.get().getNrp(),
-                    query.get().getJurusan()
+                    query.get().getJurusan(),
+                    query.get().getDataRegistrasi()
             ));
         } else {
             throw new EntityNotFoundException("DataMahasiswa with ID " + nrp + " not found");
