@@ -61,7 +61,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
 
     @Override
     public Optional<DataMahasiswaResponseDTO> getDataMahasiswaByNrp(String nrp) {
-        Optional<DataMahasiswa> query = Optional.ofNullable(repository.findDataMahasiswaByNrp(nrp));
+        Optional<DataMahasiswa> query = Optional.ofNullable(repository.findByNrp(nrp));
 
         Optional<DataMahasiswaResponseDTO> result;
 

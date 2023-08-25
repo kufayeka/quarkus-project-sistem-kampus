@@ -26,7 +26,7 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
         List<DataMataKuliahResponseDTO> result = query.stream().map(
                 x -> new DataMataKuliahResponseDTO(
                         x.getId(),
-                        x.getKode(),
+                        x.getKodeMataKuliah(),
                         x.getNama(),
                         x.getSks())
         ).toList();
@@ -43,7 +43,7 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
         if(query.isPresent()){
             result = Optional.of(new DataMataKuliahResponseDTO(
                     query.get().getId(),
-                    query.get().getKode(),
+                    query.get().getKodeMataKuliah(),
                     query.get().getNama(),
                     query.get().getSks()
             ));
@@ -60,7 +60,7 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
     public void createDataMataKuliah(DataMataKuliahRequestDTO dto) {
 
         DataMataKuliah query = new DataMataKuliah();
-        query.setKode(dto.kode());
+        query.setKodeMataKuliah(dto.kode_mata_kuliah());
         query.setNama(dto.nama());
         query.setSks(dto.sks());
 

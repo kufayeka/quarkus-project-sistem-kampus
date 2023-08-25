@@ -1,10 +1,11 @@
 package com.yekaa.modules.datamahasiswa.entity;
 
+import com.yekaa.modules.dataprs.entity.DataPrs;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,4 +19,8 @@ public class DataMahasiswa {
     @Column(unique = true)
     private String nrp;
     private String jurusan;
+
+    @OneToMany(mappedBy = "dataMahasiswa", cascade = CascadeType.ALL)
+    private Set<DataPrs> dataRegistrasi = new HashSet<>();
+
 }

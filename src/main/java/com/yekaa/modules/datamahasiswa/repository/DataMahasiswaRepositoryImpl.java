@@ -7,7 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class DataMahasiswaRepositoryImpl implements DataMahasiswaRepository{
 
     // custom queries
-    public DataMahasiswa findDataMahasiswaByNrp(String nrp) {
+    public DataMahasiswa findByNrp(String nrp) {
         return find("nrp", nrp).firstResult();
     }
 }

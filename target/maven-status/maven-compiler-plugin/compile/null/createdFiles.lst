@@ -1,5 +1,13 @@
 com\yekaa\modules\datamahasiswa\dto\DataMahasiswaResponseDTO.class
-com\yekaa\modules\datamahasiswa\entity\DataMahasiswa.class
 com\yekaa\modules\datamahasiswa\service\DataMahasiswaServiceImpl.class
-com\yekaa\modules\datamahasiswa\repository\DataMahasiswaRepositoryImpl.class
 com\yekaa\modules\datamahasiswa\dto\DataMahasiswaRequestDTO.class
+com\yekaa\modules\datamatakuliah\entity\DataMataKuliah.class
+com\yekaa\modules\datamatakuliah\dto\DataMataKuliahRequestDTO.class
+com\yekaa\modules\datamatakuliah\repository\DataMataKuliahRepositoryImpl.class
+com\yekaa\modules\datamahasiswa\entity\DataMahasiswa.class
+com\yekaa\modules\datamatakuliah\resource\DataMataKuliahResource.class
+com\yekaa\modules\datamahasiswa\repository\DataMahasiswaRepositoryImpl.class
+com\yekaa\modules\datamatakuliah\dto\DataMataKuliahResponseDTO.class
+com\yekaa\modules\datamatakuliah\service\DataMataKuliahServiceImpl.class
+com\yekaa\modules\datamatakuliah\repository\DataMataKuliahRepository.class
+com\yekaa\modules\datamatakuliah\service\DataMataKuliahService.class
