@@ -1,6 +1,7 @@
 package com.yekaa.common.exception;
 
 import com.yekaa.common.response.ErrorResponse;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Provider
+@ApplicationScoped
 public class NullPointerExceptionHandler implements ExceptionMapper<NullPointerException> {
 
     @Context
@@ -34,7 +36,7 @@ public class NullPointerExceptionHandler implements ExceptionMapper<NullPointerE
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(LocalDateTime.now());
         errorResponse.setErrorCode("INTERNAL_SERVER_ERROR");
-        errorResponse.setErrorMessage("An error occurred while processing your request.");
+        errorResponse.setErrorMessage("Null Pointer Error. An error occurred while processing your request.");
         errorResponse.setErrorDetails(errorList);
         errorResponse.setPath(uriInfo.getPath());
 

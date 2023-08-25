@@ -1,6 +1,7 @@
 package com.yekaa.common.exception;
 
 import com.yekaa.common.response.ErrorResponse;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.core.Context;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Provider
+@ApplicationScoped
 public class InternalServerErrorHandler implements ExceptionMapper<InternalServerErrorException> {
 
     @Context
@@ -26,7 +28,7 @@ public class InternalServerErrorHandler implements ExceptionMapper<InternalServe
         if (ex instanceof List) {
             List<InternalServerErrorException> exceptionList = (List<InternalServerErrorException>) ex;
             for (InternalServerErrorException exception : exceptionList) {
-                errorList.add(exception.getLocalizedMessage());
+                errorList.add(exception.toString());
             }
         } else {
             errorList.add(ex.getLocalizedMessage());
@@ -35,7 +37,7 @@ public class InternalServerErrorHandler implements ExceptionMapper<InternalServe
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(LocalDateTime.now());
         errorResponse.setErrorCode("INTERNAL_SERVER_ERROR");
-        errorResponse.setErrorMessage("An error occurred while processing your request.");
+        errorResponse.setErrorMessage("Internal Server error.");
         errorResponse.setErrorDetails(errorList);
         errorResponse.setPath(uriInfo.getPath());
 

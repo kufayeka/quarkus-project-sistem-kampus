@@ -1,6 +1,7 @@
 package com.yekaa.common.exception;
 
 import com.yekaa.common.response.ErrorResponse;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Context;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Provider
+@ApplicationScoped
 public class ConstraintViolationExceptionHandler implements ExceptionMapper<ConstraintViolationException> {
 
     @Context

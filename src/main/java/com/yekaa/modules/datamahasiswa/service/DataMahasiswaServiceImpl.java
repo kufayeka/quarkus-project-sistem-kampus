@@ -5,10 +5,12 @@ import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaResponseDTO;
 import com.yekaa.modules.datamahasiswa.entity.DataMahasiswa;
 import com.yekaa.modules.datamahasiswa.repository.DataMahasiswaRepository;
 import com.yekaa.modules.datamahasiswa.repository.DataMahasiswaRepositoryImpl;
+import jakarta.ejb.DuplicateKeyException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
@@ -80,6 +82,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
     @Override
     @Transactional
     public void createDataMahasiswa(DataMahasiswaRequestDTO dto) {
+
         DataMahasiswa query = new DataMahasiswa();
         query.setNama(dto.nama());
         query.setNrp(dto.nrp());

@@ -15,6 +15,7 @@ public class DataMahasiswa {
     private Long id;
 
     private String nama;
+    @Column(unique = true)
     private String nrp;
     private String jurusan;
 }

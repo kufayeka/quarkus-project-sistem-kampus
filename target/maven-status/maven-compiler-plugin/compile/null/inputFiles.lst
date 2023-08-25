@@ -3,12 +3,13 @@ E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\mod
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\exception\EntityNotFoundExceptionHandler.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\entity\DataMahasiswa.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\resources\DataMahasiswaResource.java
+E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\exception\ConstraintViolationExceptionHandler.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\repository\DataMahasiswaRepository.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\repository\DataMahasiswaRepositoryImpl.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\service\DataMahasiswaServiceImpl.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\service\DataMahasiswaService.java
-E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\exception\JsonParseExceptionHandler.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\exception\NullPointerExceptionHandler.java
+E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\exception\HibernateExceptionHandler.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\common\response\ErrorResponse.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\modules\datamahasiswa\dto\DataMahasiswaRequestDTO.java
 E:\Proyek\BACKEND_APPS\quarkus-project-sistem-kampus\src\main\java\com\yekaa\Main.java
