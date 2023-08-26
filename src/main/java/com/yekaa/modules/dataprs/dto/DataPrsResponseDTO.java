@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 
 public record DataPrsResponseDTO(
         Long id,
-        DataMahasiswa data_mahasiswa,
-        DataMataKuliah data_mata_kuliah,
-        LocalDateTime tanggal_pendaftaran,
-        Boolean pendaftaran_diterima
+        DataMahasiswa dataMahasiswa,
+        DataMataKuliah dataMataKuliah,
+        LocalDateTime tanggalPendaftaran,
+        Boolean pendaftaranDiterima
 ) {
 }

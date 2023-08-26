@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,19 +52,17 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
                     query.get().getDataRegistrasi())
             );
         } else {
-            throw new EntityNotFoundException("DataMataKuliah with ID " + id + " not found");
+            throw new NotFoundException("DataMataKuliah with ID " + id + " not found");
         }
-
         return result;
     }
-
 
     @Override
     @Transactional
     public void createDataMataKuliah(DataMataKuliahRequestDTO dto) {
 
         DataMataKuliah query = new DataMataKuliah();
-        query.setKodeMataKuliah(dto.kode_mata_kuliah());
+        query.setKodeMataKuliah(dto.kodeMataKuliah());
         query.setNama(dto.nama());
         query.setSks(dto.sks());
 
@@ -78,7 +77,7 @@ public class DataMataKuliahServiceImpl implements DataMataKuliahService {
         if(existingRecord.isPresent()){
             repository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("DataMataKuliah with ID " + id + " not found");
+            throw new NotFoundException("DataMataKuliah with ID " + id + " not found");
         }
     }
 }

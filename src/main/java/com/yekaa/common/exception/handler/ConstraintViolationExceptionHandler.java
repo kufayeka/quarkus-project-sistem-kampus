@@ -1,6 +1,6 @@
-package com.yekaa.common.exception;
+package com.yekaa.common.exception.handler;
 
-import com.yekaa.common.response.ErrorResponse;
+import com.yekaa.common.exception.response.ErrorResponse;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

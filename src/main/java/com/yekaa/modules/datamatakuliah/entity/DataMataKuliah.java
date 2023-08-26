@@ -29,7 +29,7 @@ public class DataMataKuliah {
     private String nama;
     private int sks;
 
-    @OneToMany(mappedBy = "dataMataKuliah", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dataMataKuliah")
     @JsonManagedReference
     private Set<DataPrs> dataRegistrasi = new HashSet<>();
 

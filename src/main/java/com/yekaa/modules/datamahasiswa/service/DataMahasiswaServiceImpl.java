@@ -1,5 +1,7 @@
 package com.yekaa.modules.datamahasiswa.service;
 
+import com.yekaa.common.exception.DataNotFoundException;
+import com.yekaa.common.util.ErrorMessageUtil;
 import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaRequestDTO;
 import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaResponseDTO;
 import com.yekaa.modules.datamahasiswa.entity.DataMahasiswa;
@@ -12,6 +14,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.NotFoundException;
 
 import javax.swing.text.html.Option;
 import java.util.ArrayList;
@@ -25,19 +28,26 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
     @Inject
     DataMahasiswaRepositoryImpl repository;
 
+    @Inject
+    ErrorMessageUtil errorMessageUtil;
+
     @Override
     public List<DataMahasiswaResponseDTO> getAllDataMahasiswa() {
         List<DataMahasiswa> query = repository.listAll();
+        List<DataMahasiswaResponseDTO> result = null;
 
-        List<DataMahasiswaResponseDTO> result = query.stream().map(
-                x -> new DataMahasiswaResponseDTO(
-                        x.getId(),
-                        x.getNama(),
-                        x.getNrp(),
-                        x.getJurusan(),
-                        x.getDataRegistrasi())
-        ).toList();
-
+        if(!query.isEmpty()){
+            result = query.stream().map(
+                    x -> new DataMahasiswaResponseDTO(
+                            x.getId(),
+                            x.getNama(),
+                            x.getNrp(),
+                            x.getJurusan(),
+                            x.getDataRegistrasi())
+            ).toList();
+        } else {
+            errorMessageUtil.throwFindAllNotFoundError("dataMahasiswa");
+        }
         return result;
     }
 
@@ -45,7 +55,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
     public Optional<DataMahasiswaResponseDTO> getDataMahasiswaById(Long id) {
         Optional<DataMahasiswa> query = repository.findByIdOptional(id);
 
-        Optional<DataMahasiswaResponseDTO> result;
+        Optional<DataMahasiswaResponseDTO> result = Optional.empty();
 
         if(query.isPresent()){
             result = Optional.of(new DataMahasiswaResponseDTO(
@@ -56,9 +66,8 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
                     query.get().getDataRegistrasi()
             ));
         } else {
-            throw new EntityNotFoundException("DataMahasiswa with ID " + id + " not found");
+            errorMessageUtil.throwFindByIdNotFoundError("dataMahasiswa", id.toString());
         }
-
         return result;
     }
 
@@ -66,7 +75,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
     public Optional<DataMahasiswaResponseDTO> getDataMahasiswaByNrp(String nrp) {
         Optional<DataMahasiswa> query = Optional.ofNullable(repository.findByNrp(nrp));
 
-        Optional<DataMahasiswaResponseDTO> result;
+        Optional<DataMahasiswaResponseDTO> result = Optional.empty();
 
         if(query.isPresent()){
             result = Optional.of(new DataMahasiswaResponseDTO(
@@ -77,7 +86,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
                     query.get().getDataRegistrasi()
             ));
         } else {
-            throw new EntityNotFoundException("DataMahasiswa with ID " + nrp + " not found");
+            errorMessageUtil.throwFindByIdNotFoundError("dataMahasiswa", nrp);
         }
 
         return result;
@@ -103,7 +112,7 @@ public class DataMahasiswaServiceImpl implements DataMahasiswaService {
         if(existingRecord.isPresent()){
             repository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("DataMahasiswa with ID " + id + " not found");
+            errorMessageUtil.throwFindByIdNotFoundError("dataMahasiswa", id.toString());
         }
     }
 }

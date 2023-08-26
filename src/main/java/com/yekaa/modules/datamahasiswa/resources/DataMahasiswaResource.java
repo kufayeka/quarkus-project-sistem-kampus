@@ -1,5 +1,6 @@
 package com.yekaa.modules.datamahasiswa.resources;
 
+import com.yekaa.common.exception.DataNotFoundException;
 import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaRequestDTO;
 import com.yekaa.modules.datamahasiswa.dto.DataMahasiswaResponseDTO;
 import com.yekaa.modules.datamahasiswa.service.DataMahasiswaServiceImpl;
@@ -33,7 +34,7 @@ public class DataMahasiswaResource {
     @Path("/getAllDataMahasiswa")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllDataMahasiswa(){
+    public Response getAllDataMahasiswa() {
         List<DataMahasiswaResponseDTO> response = service.getAllDataMahasiswa();
         return Response.ok().entity(response).build();
     }
@@ -43,12 +44,8 @@ public class DataMahasiswaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDataMahasiswaById(@PathParam("id") Long id){
-        try {
-            Optional<DataMahasiswaResponseDTO> response = service.getDataMahasiswaById(id);
-            return Response.ok().entity(response).build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
-        }
+        Optional<DataMahasiswaResponseDTO> response = service.getDataMahasiswaById(id);
+        return Response.ok().entity(response).build();
     }
 
     @GET
@@ -56,12 +53,8 @@ public class DataMahasiswaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDataMahasiswaByNrp(@PathParam("nrp") String nrp){
-        try {
-            Optional<DataMahasiswaResponseDTO> response = service.getDataMahasiswaByNrp(nrp);
-            return Response.ok().entity(response).build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
-        }
+        Optional<DataMahasiswaResponseDTO> response = service.getDataMahasiswaByNrp(nrp);
+        return Response.ok().entity(response).build();
     }
 
     @POST
@@ -78,11 +71,7 @@ public class DataMahasiswaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteDataMahasiswaById(@PathParam("id") Long id){
-        try {
-            service.deleteDataMahasiswaById(id);
-            return Response.noContent().build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
-        }
+        service.deleteDataMahasiswaById(id);
+        return Response.noContent().build();
     }
 }

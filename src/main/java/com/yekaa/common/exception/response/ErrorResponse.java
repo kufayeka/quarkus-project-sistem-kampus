@@ -1,4 +1,4 @@
-package com.yekaa.common.response;
+package com.yekaa.common.exception.response;
 
 import lombok.Data;
 

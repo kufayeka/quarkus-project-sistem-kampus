@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 
 public record DataPrsRequestDTO (
         @NotBlank
-        String nrp_mahasiswa,
+        String nrpMahasiswa,
         @NotBlank
-        String kode_mata_kuliah
+        String kodeMataKuliah
 ) {
 }

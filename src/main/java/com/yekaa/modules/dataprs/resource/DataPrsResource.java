@@ -1,10 +1,10 @@
 package com.yekaa.modules.dataprs.resource;
 
+import com.yekaa.common.exception.DataNotFoundException;
 import com.yekaa.modules.dataprs.dto.DataPrsRequestDTO;
 import com.yekaa.modules.dataprs.dto.DataPrsResponseDTO;
 import com.yekaa.modules.dataprs.service.DataPrsServiceImpl;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -40,8 +40,8 @@ public class DataPrsResource {
         try {
             Optional<DataPrsResponseDTO> response = service.getDataPrsById(id);
             return Response.ok().entity(response).build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
+        } catch (DataNotFoundException ex) {
+            throw ex;
         }
     }
 
@@ -62,8 +62,8 @@ public class DataPrsResource {
         try {
             service.deleteDataPrsById(id);
             return Response.noContent().build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
+        } catch (DataNotFoundException ex) {
+            throw ex;
         }
     }
 }

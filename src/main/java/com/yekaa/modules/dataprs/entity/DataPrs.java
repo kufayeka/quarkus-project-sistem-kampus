@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yekaa.modules.datamahasiswa.entity.DataMahasiswa;
 import com.yekaa.modules.datamatakuliah.entity.DataMataKuliah;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -22,12 +20,12 @@ public class DataPrs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "data_mahasiswa_id")
     @JsonBackReference
     private DataMahasiswa dataMahasiswa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "data_mata_kuliah_id")
     @JsonBackReference
     private DataMataKuliah dataMataKuliah;

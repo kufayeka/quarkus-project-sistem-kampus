@@ -6,9 +6,9 @@ import java.util.Set;
 
 public record DataMahasiswaResponseDTO(
         Long id,
-        String nama_mahasiswa,
-        String nrp_mahasiswa,
-        String jurusan_mahasiswa,
-        Set<DataPrs> data_registrasi
+        String namaMahasiswa,
+        String nrpMahasiswa,
+        String jurusanMahasiswa,
+        Set<DataPrs> dataRegistrasi
 ) {
 }

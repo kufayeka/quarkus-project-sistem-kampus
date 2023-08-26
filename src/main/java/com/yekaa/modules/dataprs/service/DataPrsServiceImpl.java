@@ -8,17 +8,14 @@ import com.yekaa.modules.dataprs.dto.DataPrsRequestDTO;
 import com.yekaa.modules.dataprs.dto.DataPrsResponseDTO;
 import com.yekaa.modules.dataprs.entity.DataPrs;
 import com.yekaa.modules.dataprs.repository.DataPrsRepositoryImpl;
+import com.yekaa.common.util.ErrorMessageUtil;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PrePersist;
 import jakarta.transaction.Transactional;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 // service implementation
 @ApplicationScoped
@@ -32,6 +29,9 @@ public class DataPrsServiceImpl implements DataPrsService {
 
     @Inject
     DataMataKuliahRepositoryImpl repositoryDataMataKuliah;
+
+    @Inject
+    ErrorMessageUtil errorMessageUtil;
 
     @Override
     public List<DataPrsResponseDTO> getAllDataPrs() {
@@ -53,7 +53,7 @@ public class DataPrsServiceImpl implements DataPrsService {
     public Optional<DataPrsResponseDTO> getDataPrsById(Long id) {
         Optional<DataPrs> query = repository.findByIdOptional(id);
 
-        Optional<DataPrsResponseDTO> result;
+        Optional<DataPrsResponseDTO> result = null;
 
         if(query.isPresent()){
             result = Optional.of(new DataPrsResponseDTO(
@@ -64,7 +64,7 @@ public class DataPrsServiceImpl implements DataPrsService {
                     query.get().getPendaftaranDiterima()
             ));
         } else {
-            throw new EntityNotFoundException("DataPrs with ID " + id + " not found");
+            errorMessageUtil.throwFindByIdNotFoundError("dataPrs", id.toString());
         }
 
         return result;
@@ -75,10 +75,22 @@ public class DataPrsServiceImpl implements DataPrsService {
     @Transactional
     public void createDataPrs(DataPrsRequestDTO dto) {
         DataMahasiswa dataMahasiswaExisting =
-                repositoryDataMahasiswa.findByNrp(dto.nrp_mahasiswa());
+                repositoryDataMahasiswa.findByNrp(dto.nrpMahasiswa());
+
+        if (dataMahasiswaExisting != null) {
+            return;
+        } else {
+            errorMessageUtil.throwFindByIdNotFoundError("dataMahasiswa", dto.nrpMahasiswa());
+        }
 
         DataMataKuliah dataMataKuliahExisting =
-                repositoryDataMataKuliah.findByKodeMataKuliah(dto.kode_mata_kuliah());
+                repositoryDataMataKuliah.findByKodeMataKuliah(dto.kodeMataKuliah());
+
+        if (dataMataKuliahExisting != null) {
+            return;
+        } else {
+            errorMessageUtil.throwFindByIdNotFoundError("dataMataKuliah", dto.kodeMataKuliah());
+        }
 
         DataPrs query = new DataPrs();
         query.setDataMahasiswa(dataMahasiswaExisting);
@@ -95,7 +107,7 @@ public class DataPrsServiceImpl implements DataPrsService {
         if(existingRecord.isPresent()){
             repository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("DataPrs with ID " + id + " not found");
+            errorMessageUtil.throwFindByIdNotFoundError("dataPrs",id.toString());
         }
     }
 }

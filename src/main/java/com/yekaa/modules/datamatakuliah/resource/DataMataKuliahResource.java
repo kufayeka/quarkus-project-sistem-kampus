@@ -41,8 +41,8 @@ public class DataMataKuliahResource {
         try {
             Optional<DataMataKuliahResponseDTO> response = service.getDataMataKuliahById(id);
             return Response.ok().entity(response).build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
+        } catch (NotFoundException ex) {
+            throw new NotFoundException(ex);
         }
     }
 
@@ -63,8 +63,8 @@ public class DataMataKuliahResource {
         try {
             service.deleteDataMataKuliahById(id);
             return Response.noContent().build();
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException(ex);
+        } catch (NotFoundException ex) {
+            throw new NotFoundException(ex);
         }
     }
 }

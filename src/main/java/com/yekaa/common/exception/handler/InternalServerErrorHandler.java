@@ -1,9 +1,8 @@
-package com.yekaa.common.exception;
+package com.yekaa.common.exception.handler;
 
-import com.yekaa.common.response.ErrorResponse;
+import com.yekaa.common.exception.response.ErrorResponse;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.ConstraintViolation;
+import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -13,23 +12,22 @@ import jakarta.ws.rs.ext.Provider;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Provider
 @ApplicationScoped
-public class EntityNotFoundExceptionHandler implements ExceptionMapper<EntityNotFoundException> {
+public class InternalServerErrorHandler implements ExceptionMapper<InternalServerErrorException> {
 
     @Context
     private UriInfo uriInfo;
     @Override
-    public Response toResponse(EntityNotFoundException ex) {
-        // check if ex is contains more than one errors
+    public Response toResponse(InternalServerErrorException ex) {
+        // check if ex is contains more than one error
         List<String> errorList = new ArrayList<>();
 
         if (ex instanceof List) {
-            List<EntityNotFoundException> exceptionList = (List<EntityNotFoundException>) ex;
-            for (EntityNotFoundException exception : exceptionList) {
-                errorList.add(exception.getLocalizedMessage());
+            List<InternalServerErrorException> exceptionList = (List<InternalServerErrorException>) ex;
+            for (InternalServerErrorException exception : exceptionList) {
+                errorList.add(exception.toString());
             }
         } else {
             errorList.add(ex.getLocalizedMessage());
@@ -37,15 +35,13 @@ public class EntityNotFoundExceptionHandler implements ExceptionMapper<EntityNot
 
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(LocalDateTime.now());
-        errorResponse.setErrorCode("ENTITY_NOT_FOUND");
-        errorResponse.setErrorMessage("Entity not found");
+        errorResponse.setErrorCode("INTERNAL_SERVER_ERROR");
+        errorResponse.setErrorMessage("Internal Server error.");
         errorResponse.setErrorDetails(errorList);
         errorResponse.setPath(uriInfo.getPath());
 
-        return Response.status(Response.Status.NOT_FOUND)
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                 .entity(errorResponse)
                 .build();
     }
 }
-
-

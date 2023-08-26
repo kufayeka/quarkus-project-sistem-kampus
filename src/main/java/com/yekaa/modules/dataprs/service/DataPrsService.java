@@ -9,7 +9,7 @@ import java.util.Optional;
 // service interface
 public interface DataPrsService {
     List<DataPrsResponseDTO> getAllDataPrs();
-    Optional<DataPrsResponseDTO> getDataPrsById(Long id);
+    Optional<DataPrsResponseDTO> getDataPrsById(Long id) throws Exception;
     void createDataPrs(DataPrsRequestDTO dto);
     void deleteDataPrsById(Long id);
 }

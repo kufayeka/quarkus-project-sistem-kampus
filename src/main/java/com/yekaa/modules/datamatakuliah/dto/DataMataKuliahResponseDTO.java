@@ -7,9 +7,9 @@ import java.util.Set;
 
 public record DataMataKuliahResponseDTO(
         Long id,
-        String kode_mata_kuliah,
+        String kodeMataKuliah,
         String nama,
         int sks,
-        Set<DataPrs> data_registrasi
+        Set<DataPrs> dataRegistrasi
 ) {
 }

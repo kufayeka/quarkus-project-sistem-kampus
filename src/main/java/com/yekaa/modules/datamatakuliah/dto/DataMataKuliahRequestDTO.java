@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DataMataKuliahRequestDTO(
         @NotBlank(message = "Kode mata kuliah tidak boleh kosong.")
-        String kode_mata_kuliah,
+        String kodeMataKuliah,
         @NotBlank(message = "Nama mata kuliah tidak boleh kosong.")
         String nama,
         @NotNull(message = "Sks mata kuliah tidak boleh kosong.")
